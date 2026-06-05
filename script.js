@@ -1,8 +1,6 @@
-document.getElementById('leadForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    const msg = document.getElementById('mensaje');
-    
+document.getElementById('leadForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita que la página se recargue
+
     const data = {
         nombre: document.getElementById('nombre').value,
         email: document.getElementById('email').value,
@@ -10,24 +8,22 @@ document.getElementById('leadForm').addEventListener('submit', async (e) => {
         fecha: document.getElementById('fecha').value
     };
 
-    // PEGA AQUÍ TU WEBHOOK URL
-    const WEBHOOK_URL = ''; 
-
-    try {
-        btn.disabled = true;
-        const response = await fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) throw new Error('Error en la conexión con el servidor.');
-        
-        msg.textContent = '¡Gracias! Nos pondremos en contacto pronto.';
-    } catch (error) {
-        msg.textContent = 'Hubo un error al enviar. Por favor, intenta de nuevo.';
-        console.error('Error:', error);
-    } finally {
-        btn.disabled = false;
-    }
+    // Aquí irá tu URL de Webhook de n8n
+    fetch('https://garland-fraying-unify.ngrok-free.dev/webhook/ac4126e5-ce24-4bd7-a6b8-3cc8ff0c15e6/webhook', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+        if (response.ok) {
+            document.getElementById('mensaje').innerText = "¡Gracias! Tu solicitud ha sido enviada.";
+        } else {
+            document.getElementById('mensaje').innerText = "Hubo un error, intenta de nuevo.";
+        }
+    })
+    .catch(error => {
+        document.getElementById('mensaje').innerText = "Error de conexión.";
+    });
 });
