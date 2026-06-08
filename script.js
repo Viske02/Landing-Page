@@ -1,29 +1,33 @@
 document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Evita que la página se recargue
 
+    // Recopilamos los datos del formulario
     const data = {
         nombre: document.getElementById('nombre').value,
+        apellido: document.getElementById('apellido') ? document.getElementById('apellido').value : "",
         email: document.getElementById('email').value,
         telefono: document.getElementById('telefono').value,
-        fecha: document.getElementById('fecha').value
+        fecha: new Date().toLocaleString() // Generamos la fecha actual
     };
 
-    // Aquí irá tu URL de Webhook de n8n
-    fetch('https://garland-fraying-unify.ngrok-free.dev/webhook/ac4126e5-ce24-4bd7-a6b8-3cc8ff0c15e6/webhook', {
+    // PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT (la que termina en /exec)
+    const url = 'https://script.google.com/macros/s/AKfycbxrhNW5Vyr2ZW1HA9WTT0v4GUh6D0Cy9LB6vdV7WmacLCQdGysO7JubuVBsBjQNiw4c/exec';
+
+    fetch(url, {
         method: 'POST',
+        mode: 'no-cors', // Necesario para evitar bloqueos de seguridad
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
     })
-    .then(response => {
-        if (response.ok) {
-            document.getElementById('mensaje').innerText = "¡Gracias! Tu solicitud ha sido enviada.";
-        } else {
-            document.getElementById('mensaje').innerText = "Hubo un error, intenta de nuevo.";
-        }
+    .then(() => {
+        // Mostramos el mensaje de éxito
+        document.getElementById('mensaje').innerText = "¡Gracias! Tu solicitud ha sido enviada.";
+        document.getElementById('leadForm').reset(); // Limpiamos el formulario
     })
     .catch(error => {
-        document.getElementById('mensaje').innerText = "Error de conexión.";
+        console.error('Error:', error);
+        document.getElementById('mensaje').innerText = "Hubo un error de conexión. Intenta de nuevo.";
     });
 });
