@@ -9,7 +9,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         fecha: new Date().toLocaleString()
     };
 
-    const url = 'https://script.google.com/macros/s/AKfycbzV-Ky5d2uxxynvYsDhmhnU8vcNbxxFjHW8G1i15rudpqlt2pEIMJWlE_FwFFDOAKDc/exec';
+    const url = 'https://script.google.com/macros/s/AKfycby-oXjH2XMP4LDESioaMkDE5uE7F9eZY9a49DPTbD5_M79UKYNZoSSVNmo9Hm6sMR9U/exec';
 
     fetch(url, {
         method: 'POST',
