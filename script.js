@@ -37,7 +37,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
   const formData = new FormData();
   for (let key in data) { formData.append(key, data[key]); }
 
-  fetch('https://script.google.com/macros/s/AKfycbwXyJ8JZ4cUvOwUELaRzVNMWSGvyxHFPgRzV9hvo7bKRgz2LVUS7IKJumzYQbD7DJLp/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbwRtLu1pr-MN40Kl4aaBH1qwuO14wjQNkV9mX-zLxPUL8ul-MZeDOwd45NJObwv4r-n/exec', {
     method: 'POST',
     body: formData // Enviamos el formulario directamente
   })
