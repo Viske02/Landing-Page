@@ -1,35 +1,28 @@
-// Definimos los rangos de hora
 const horariosDisponibles = [
   "08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00",
   "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00"
 ];
 
-// Función para mostrar los horarios al hacer clic en el botón
+// Botón para mostrar horarios
 document.getElementById('btnVerHorarios').addEventListener('click', function() {
-  const fechaSeleccionada = document.getElementById('fecha').value;
-  
-  if (!fechaSeleccionada) {
-    alert("Por favor, selecciona una fecha primero.");
-    return;
-  }
+  const fecha = document.getElementById('fecha').value;
+  if (!fecha) { alert("Selecciona una fecha primero."); return; }
 
   const selectHora = document.getElementById('hora');
-  selectHora.innerHTML = ''; // Limpiamos opciones anteriores
-  
-  horariosDisponibles.forEach(function(hora) {
-    let option = document.createElement('option');
-    option.value = hora;
-    option.text = hora;
-    selectHora.add(option);
+  selectHora.innerHTML = '';
+  horariosDisponibles.forEach(function(h) {
+    let opt = document.createElement('option');
+    opt.value = h; opt.text = h;
+    selectHora.add(opt);
   });
-
-  // Mostramos el contenedor de horarios que estaba oculto
   document.getElementById('contenedorHorarios').style.display = 'block';
 });
 
-// Lógica de envío del formulario
+// Envío del formulario
 document.getElementById('leadForm').addEventListener('submit', function(event) {
   event.preventDefault(); 
+  const mensaje = document.getElementById('mensaje');
+  mensaje.innerText = "Enviando...";
 
   const data = {
     nombre: document.getElementById('nombre').value,
@@ -40,24 +33,21 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     hora: document.getElementById('hora').value
   };
 
-  const url = 'https://script.google.com/macros/s/AKfycbwXyJ8JZ4cUvOwUELaRzVNMWSGvyxHFPgRzV9hvo7bKRgz2LVUS7IKJumzYQbD7DJLp/exec';
+  // Usamos un formulario para enviar los datos (esto es lo que mejor lee Google Apps Script)
+  const formData = new FormData();
+  for (let key in data) { formData.append(key, data[key]); }
 
-  fetch(url, {
+  fetch('https://script.google.com/macros/s/AKfycbwXyJ8JZ4cUvOwUELaRzVNMWSGvyxHFPgRzV9hvo7bKRgz2LVUS7IKJumzYQbD7DJLp/exec', {
     method: 'POST',
-    mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
+    body: formData // Enviamos el formulario directamente
   })
   .then(() => {
-    document.getElementById('mensaje').innerText = "¡Gracias! Tu cita ha sido agendada correctamente.";
+    mensaje.innerText = "¡Gracias! Cita agendada.";
     document.getElementById('leadForm').reset();
-    // Opcional: volvemos a ocultar el selector al enviar
     document.getElementById('contenedorHorarios').style.display = 'none';
   })
-  .catch(error => {
-    console.error('Error:', error);
-    document.getElementById('mensaje').innerText = "Hubo un error de conexión. Intenta de nuevo.";
+  .catch(err => {
+    console.error(err);
+    mensaje.innerText = "Error. Intenta de nuevo.";
   });
 });
