@@ -29,17 +29,17 @@
             <input type="email" id="email" placeholder="Email" required>
             <input type="tel" id="telefono" placeholder="Teléfono" required>
             
-            <!-- Selector de Fecha -->
             <label for="fecha" style="display:block; margin-top:10px; color:#555;">Selecciona el día:</label>
             <input type="date" id="fecha" required>
             
-            <!-- Selector de Hora -->
-            <label for="hora" style="display:block; margin-top:10px; color:#555;">Selecciona el horario:</label>
-            <select id="hora" required>
-                <option value="">Selecciona una fecha primero...</option>
-            </select>
+            <button type="button" id="btnVerHorarios" style="margin-top:10px; width:100%;">Ver horarios disponibles</button>
             
-            <button type="submit" style="margin-top:15px;">Solicitar Asesoría</button>
+            <div id="contenedorHorarios" style="display:none; margin-top:10px;">
+                <label for="hora" style="display:block; color:#555;">Elige un horario:</label>
+                <select id="hora" style="width:100%; padding:10px; margin-top:5px;"></select>
+            </div>
+            
+            <button type="submit" style="margin-top:20px; width:100%;">Solicitar Asesoría</button>
             <p id="mensaje"></p>
         </form>
     </section>
