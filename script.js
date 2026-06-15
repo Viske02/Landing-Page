@@ -4,7 +4,7 @@ const todosLosHorarios = [
 ];
 
 // URL de tu Web App
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby-0Bmk0DXKYnCxhjj3jywnqZUsOI1dzJBNlTDLS5HsKwZyRwIe9KH_V0z2pl1wrHDL/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbymwdR-YFCxaPkswhSv6A3MspmwatiuSP7v3zqXmfmsq-K-rQxOGZFlUka_tHGBQlcu/exec';
 
 // Botón para mostrar horarios disponibles
 document.getElementById('btnVerHorarios').addEventListener('click', function() {
