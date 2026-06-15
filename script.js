@@ -40,7 +40,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     hora: document.getElementById('hora').value
   };
 
-  const url = 'https://script.google.com/macros/s/AKfycbxY3SXKl-0x43n2o7Rb0r3JfTFMXnMFP3O-MmyaJoUCaQ8YmrHVxLKiOiQSmeSPo1YG/exec';
+  const url = 'https://script.google.com/macros/s/AKfycbwXyJ8JZ4cUvOwUELaRzVNMWSGvyxHFPgRzV9hvo7bKRgz2LVUS7IKJumzYQbD7DJLp/exec';
 
   fetch(url, {
     method: 'POST',
