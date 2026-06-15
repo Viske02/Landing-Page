@@ -29,8 +29,15 @@
             <input type="email" id="email" placeholder="Email" required>
             <input type="tel" id="telefono" placeholder="Teléfono" required>
             
-            <label for="fecha" style="display:block; margin-top:10px; color:#555;">Selecciona tu cita:</label>
-            <input type="datetime-local" id="fecha" name="fecha" required>
+            <!-- Selector de Fecha -->
+            <label for="fecha" style="display:block; margin-top:10px; color:#555;">Selecciona el día:</label>
+            <input type="date" id="fecha" required>
+            
+            <!-- Selector de Hora -->
+            <label for="hora" style="display:block; margin-top:10px; color:#555;">Selecciona el horario:</label>
+            <select id="hora" required>
+                <option value="">Selecciona una fecha primero...</option>
+            </select>
             
             <button type="submit" style="margin-top:15px;">Solicitar Asesoría</button>
             <p id="mensaje"></p>
